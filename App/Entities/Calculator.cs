@@ -6,6 +6,9 @@ namespace App
 
         public double calcPrice(List<Distance> distances, int distance)
         {
+            if (distance <= 0)
+                return 0;
+
             if (!distances.Any())
                 return DEFAULT_PRICE * distance;
 
@@ -21,7 +24,7 @@ namespace App
                 if (remainingDistance <= 0) break;
 
                 Distance current = distances[i];
-                Distance? next = distances.Count - i == 1 ? null : distances[i + 1];
+                Distance? next = i == distances.Count - 1 ? null : distances[i + 1];
 
                 if (next != null)
                 {
