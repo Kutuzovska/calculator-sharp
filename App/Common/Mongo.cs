@@ -1,20 +1,18 @@
 using MongoDB.Driver;
 
-namespace App
+namespace ccalc.Common;
+
+public class Mongo
 {
-    public class Mongo
+    private IMongoDatabase? _database;
+
+    public IMongoDatabase Db()
     {
-        private static IMongoDatabase? database;
+        if (_database != null) return _database;
 
-        public static IMongoDatabase Db()
-        {
-            if (database == null)
-            {
-                MongoClient client = new MongoClient("mongodb://root:root@localhost:27017");
-                database = client.GetDatabase("ccalc");
-            }
+        var client = new MongoClient("mongodb://root:root@localhost:27017");
+        _database = client.GetDatabase("ccalc");
 
-            return database;
-        }
+        return _database;
     }
 }

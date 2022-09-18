@@ -1,19 +1,20 @@
-namespace App
+using ccalc.Entities;
+using ccalc.Repositories;
+
+namespace ccalc.Services;
+
+public class CalculatorService : ICalculatorService
 {
-    public class CalculatorService : ICalculatorService
+    private readonly IDistancesRepository _repository;
+
+    public CalculatorService(IDistancesRepository repository)
     {
-        private readonly IDistancesRepository repository;
+        _repository = repository;
+    }
 
-        public CalculatorService(IDistancesRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        public double CalculateDistancePrice(int distance)
-        {
-            List<Distance> distances = repository.All();
-            Calculator calculator = new Calculator();
-            return calculator.CalcPrice(distances, distance);
-        }
+    public double CalculateDistancePrice(int distance)
+    {
+        var distances = _repository.All();
+        return Calculator.CalcPrice(distances, distance);
     }
 }

@@ -1,15 +1,15 @@
+using ccalc.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App
+namespace ccalc.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class CalculatorController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class CalculatorController : ControllerBase
+    [HttpGet]
+    public double Get(ICalculatorService service, [FromQuery(Name = "distance")] int distance)
     {
-        [HttpGet()]
-        public double Get(ICalculatorService service, [FromQuery(Name = "distance")] int distance)
-        {
-            return service.CalculateDistancePrice(distance);
-        }
+        return service.CalculateDistancePrice(distance);
     }
 }

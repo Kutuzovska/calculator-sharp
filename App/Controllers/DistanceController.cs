@@ -1,21 +1,22 @@
+using ccalc.Entities;
+using ccalc.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App
-{
-    [ApiController]
-    [Route("[controller]")]
-    public class DistanceController : ControllerBase
-    {
-        [HttpGet()]
-        public List<Distance> Get(IDistancesRepository repository)
-        {
-            return repository.All();
-        }
+namespace ccalc.Controllers;
 
-        [HttpPost()]
-        public void Get(IDistancesRepository repository, [FromBody] Distance distance)
-        {
-            repository.Add(distance);
-        }
+[ApiController]
+[Route("[controller]")]
+public class DistanceController : ControllerBase
+{
+    [HttpGet]
+    public List<Distance> Get(IDistancesRepository repository)
+    {
+        return repository.All();
+    }
+
+    [HttpPost]
+    public void Get(IDistancesRepository repository, [FromBody] Distance distance)
+    {
+        repository.Add(distance);
     }
 }

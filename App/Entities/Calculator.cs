@@ -1,49 +1,48 @@
-namespace App
+namespace ccalc.Entities;
+
+public static class Calculator
 {
-    public class Calculator
+    private const int DefaultPrice = 100;
+
+    public static double CalcPrice(List<Distance> distances, int distance)
     {
-        private const int DEFAULT_PRICE = 100;
+        if (distance <= 0)
+            return 0;
 
-        public double CalcPrice(List<Distance> distances, int distance)
+        if (!distances.Any())
+            return DefaultPrice * distance;
+
+        distances.Sort((Distance a, Distance b) => a.Start - b.Start);
+
+        if (!distances.First().Start.Equals(0))
+            distances.Insert(0, new Distance(0, DefaultPrice));
+
+        double result = 0;
+        var remainingDistance = distance;
+        for (var i = 0; i < distances.Count; i++)
         {
-            if (distance <= 0)
-                return 0;
+            if (remainingDistance <= 0) break;
 
-            if (!distances.Any())
-                return DEFAULT_PRICE * distance;
+            var current = distances[i];
+            var next = i == distances.Count - 1 ? null : distances[i + 1];
 
-            distances.Sort((Distance a, Distance b) => a.Start - b.Start);
-
-            if (!distances.First().Start.Equals(0))
-                distances.Insert(0, new Distance(0, DEFAULT_PRICE));
-
-            double result = 0;
-            int remainingDistance = distance;
-            for (int i = 0; i < distances.Count; i++)
+            if (next != null)
             {
-                if (remainingDistance <= 0) break;
+                var slice = next.Start - current.Start;
+                remainingDistance -= slice;
 
-                Distance current = distances[i];
-                Distance? next = i == distances.Count - 1 ? null : distances[i + 1];
+                if (remainingDistance < 0)
+                    slice += remainingDistance;
 
-                if (next != null)
-                {
-                    int slice = next.Start - current.Start;
-                    remainingDistance -= slice;
-
-                    if (remainingDistance < 0)
-                        slice += remainingDistance;
-
-                    result += slice * current.Price;
-                }
-                else
-                {
-                    result += remainingDistance * current.Price;
-                    remainingDistance = 0;
-                }
+                result += slice * current.Price;
             }
-
-            return result;
+            else
+            {
+                result += remainingDistance * current.Price;
+                remainingDistance = 0;
+            }
         }
+
+        return result;
     }
 }

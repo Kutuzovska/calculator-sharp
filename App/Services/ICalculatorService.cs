@@ -1,7 +1,6 @@
-namespace App
+namespace ccalc.Services;
+
+public interface ICalculatorService
 {
-    public interface ICalculatorService
-    {
-        public double CalculateDistancePrice(int distance);
-    }
+    public double CalculateDistancePrice(int distance);
 }
