@@ -6,10 +6,10 @@ namespace App
     [Route("[controller]")]
     public class CalculatorController : ControllerBase
     {
-        [HttpPost()]
-        public double Get(ICalculatorService service)
+        [HttpGet()]
+        public double Get([FromServices] ICalculatorService service, [FromQuery(Name = "distance")] int distance)
         {
-            return service.CalculateDistancePrice(305);
+            return service.CalculateDistancePrice(distance);
         }
     }
 }
