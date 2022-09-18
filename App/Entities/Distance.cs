@@ -1,10 +1,13 @@
+using System.ComponentModel.DataAnnotations;
 namespace App
 {
     public class Distance
     {
-        public readonly int Start;
+        [Required]
+        public int Start { get; }
 
-        public readonly double Price;
+        [Required]
+        public double Price { get; }
 
         public Distance(int Start, double Price)
         {
