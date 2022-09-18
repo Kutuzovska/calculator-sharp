@@ -9,10 +9,6 @@ namespace App
 
         public MongoDistancesRepository()
         {
-            var hasCollection = Mongo.Db().GetCollection<BsonDocument>("distances");
-            if (hasCollection == null)
-                Mongo.Db().CreateCollection("distances");
-
             collection = Mongo.Db().GetCollection<BsonDocument>("distances");
         }
 
@@ -20,11 +16,10 @@ namespace App
         {
             List<Distance> distances = new List<Distance>();
 
-            var documents = collection.Find(new BsonDocument()).ToList();
+            var filter = new BsonDocument();
+            var documents = collection.Find(filter).ToList();
             foreach (BsonDocument document in documents)
-            {
                 distances.Add(new Distance(((int)document["Start"]), (double)document["Price"]));
-            }
 
             return distances;
         }
