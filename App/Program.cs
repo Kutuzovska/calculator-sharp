@@ -9,7 +9,7 @@ public static class Program
     public static void Main()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Services.AddControllers();
+        builder.Services.AddControllersWithViews();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -23,10 +23,18 @@ public static class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        else
+        {
+            app.UseHsts();
+        }
+
 
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.MapFallbackToFile("index.html");
         app.Run();
     }
 }

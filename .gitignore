@@ -1,4 +1,8 @@
 .vscode
 .idea
+.DS_STORE
+App/ClientApp/node_modules
+App/ClientApp/.angular/cache
+App/ClientApp/dist
 bin/
 obj/
