@@ -9,7 +9,7 @@
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddSingleton<IDistancesRepository, ArrayDistancesRepository>();
+            builder.Services.AddSingleton<IDistancesRepository, MongoDistancesRepository>();
             builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
 
             var app = builder.Build();
@@ -24,6 +24,7 @@
             app.MapControllers();
             app.Run();
         }
+
     }
 }
 

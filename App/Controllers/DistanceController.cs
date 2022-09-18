@@ -11,5 +11,11 @@ namespace App
         {
             return repository.All();
         }
+
+        [HttpPost()]
+        public void Get([FromServices] IDistancesRepository repository, [FromBody] Distance distance)
+        {
+            repository.Add(distance);
+        }
     }
 }
