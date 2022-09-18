@@ -15,4 +15,12 @@ public class DistanceTest
         Assert.Throws<DistanceInvalidCreateException>(() => new Distance(-1, 10));
         Assert.Throws<DistanceInvalidCreateException>(() => new Distance(10, 0));
     }
+
+    [Fact]
+    public void EmptyDistance()
+    {
+        Distance distance = new Distance { Start = -1, Price = -1 };
+        Assert.Equal(-1, distance.Price);
+        Assert.Equal(-1, distance.Start);
+    }
 }
