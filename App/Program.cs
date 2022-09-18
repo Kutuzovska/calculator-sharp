@@ -1,16 +1,28 @@
 ﻿namespace App
 {
-    using System;
-
     class Program
     {
         public static void Main()
         {
-            IDistancesRepository repository = new ArrayDistancesRepository();
-            CalculatorService service = new CalculatorService(repository);
+            var builder = WebApplication.CreateBuilder();
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-            double result = service.calculateDistancePrice(305);
-            Console.WriteLine(result);
+            builder.Services.AddSingleton<IDistancesRepository, ArrayDistancesRepository>();
+            builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
+
+            var app = builder.Build();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+            app.MapControllers();
+            app.Run();
         }
     }
 }

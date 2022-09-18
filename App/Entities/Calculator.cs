@@ -4,7 +4,7 @@ namespace App
     {
         private const int DEFAULT_PRICE = 100;
 
-        public double calcPrice(List<Distance> distances, int distance)
+        public double CalcPrice(List<Distance> distances, int distance)
         {
             if (distance <= 0)
                 return 0;

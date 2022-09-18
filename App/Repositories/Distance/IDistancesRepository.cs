@@ -2,6 +2,6 @@ namespace App
 {
     public interface IDistancesRepository
     {
-        public List<Distance> all();
+        public List<Distance> All();
     }
 }

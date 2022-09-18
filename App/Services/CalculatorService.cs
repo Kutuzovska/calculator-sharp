@@ -1,6 +1,6 @@
 namespace App
 {
-    public class CalculatorService
+    public class CalculatorService : ICalculatorService
     {
         private readonly IDistancesRepository repository;
 
@@ -9,11 +9,11 @@ namespace App
             this.repository = repository;
         }
 
-        public double calculateDistancePrice(int distance)
+        public double CalculateDistancePrice(int distance)
         {
-            List<Distance> distances = repository.all();
+            List<Distance> distances = repository.All();
             Calculator calculator = new Calculator();
-            return calculator.calcPrice(distances, distance);
+            return calculator.CalcPrice(distances, distance);
         }
     }
 }
