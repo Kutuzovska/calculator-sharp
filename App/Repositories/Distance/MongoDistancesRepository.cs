@@ -1,5 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
+using System.Reflection;
 
 namespace App
 {
@@ -18,8 +20,13 @@ namespace App
 
             var filter = new BsonDocument();
             var documents = collection.Find(filter).ToList();
+
+
             foreach (BsonDocument document in documents)
-                distances.Add(new Distance(((int)document["Start"]), (double)document["Price"]));
+            {
+                Distance distance = new Distance { Start = (int)document["Start"], Price = (double)document["Price"] };
+                distances.Add(distance);
+            }
 
             return distances;
         }

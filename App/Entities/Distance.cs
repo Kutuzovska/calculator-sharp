@@ -1,14 +1,16 @@
-using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
 namespace App
 {
     public class Distance
     {
-        [Required]
-        public int Start { get; }
+        public required int Start { get; init; }
 
-        [Required]
-        public double Price { get; }
+        public required double Price { get; init; }
 
+        public Distance() { }
+
+        [SetsRequiredMembers]
         public Distance(int Start, double Price)
         {
             if (Start < 0)

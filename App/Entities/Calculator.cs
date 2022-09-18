@@ -31,10 +31,10 @@ namespace App
                     int slice = next.Start - current.Start;
                     remainingDistance -= slice;
 
-                    if (remainingDistance >= 0)
-                        result += slice * current.Price;
-                    else
-                        result += (slice - remainingDistance) * current.Price;
+                    if (remainingDistance < 0)
+                        slice += remainingDistance;
+
+                    result += slice * current.Price;
                 }
                 else
                 {

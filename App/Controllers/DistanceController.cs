@@ -7,13 +7,13 @@ namespace App
     public class DistanceController : ControllerBase
     {
         [HttpGet()]
-        public List<Distance> Get([FromServices] IDistancesRepository repository)
+        public List<Distance> Get(IDistancesRepository repository)
         {
             return repository.All();
         }
 
         [HttpPost()]
-        public void Get([FromServices] IDistancesRepository repository, [FromBody] Distance distance)
+        public void Get(IDistancesRepository repository, [FromBody] Distance distance)
         {
             repository.Add(distance);
         }

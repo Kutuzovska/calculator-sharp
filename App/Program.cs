@@ -24,7 +24,6 @@
             app.MapControllers();
             app.Run();
         }
-
     }
 }
 

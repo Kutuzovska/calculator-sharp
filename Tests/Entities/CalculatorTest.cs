@@ -26,4 +26,19 @@ public class CalculatorTest
         result = calculator.CalcPrice(distances, 305);
         Assert.Equal(100 * 100 + 200 * 80 + 5 * 70, result);
     }
+
+    [Fact]
+    public void CalcLittleDistantion()
+    {
+        Calculator calculator = new Calculator();
+        List<Distance> distances = new List<Distance>();
+
+        double result;
+        result = calculator.CalcPrice(distances, 1);
+        Assert.Equal(100, result);
+
+        distances.Add(new Distance(0, 10));
+        result = calculator.CalcPrice(distances, 1);
+        Assert.Equal(10, result);
+    }
 }
